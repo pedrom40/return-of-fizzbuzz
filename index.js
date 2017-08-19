@@ -6,17 +6,17 @@ function clearResults(){
 
 function numberCounter(numToCount){
 
-  // count from 0 to number submitted
-  for (let i=0; i <= numToCount; i++){
+  // count from 1 to number submitted
+  for (let i=1; i <= numToCount; i++){
 
     if (i % 3 === 0 && i % 5 === 0){
-      appendDiv(i, '.fizzbuzz');
+      appendDiv(i, 'fizzbuzz');
     }
     else if (i % 3 === 0){
-      appendDiv(i, '.fizz');
+      appendDiv(i, 'fizz');
     }
     else if (i % 5 === 0){
-      appendDiv(i, '.buzz');
+      appendDiv(i, 'buzz');
     }
     else {
       appendDiv(i, '');
@@ -26,16 +26,28 @@ function numberCounter(numToCount){
 
 }
 
-function appendDiv(num, classToAdd){
-  $('.js-results').append(`
-    <div class="fizz-buzz-item ${classToAdd}">
-      <span>${num}</span>
-    </div>
-  `);
+function getSpanContent(num, classToAdd){
+  let spanContent = '';
+
+  if (classToAdd !== ''){
+    spanContent = classToAdd;
+  }
+  else {
+    spanContent = num;
+  }
+
+  return spanContent;
 }
 
-function resetInputs(){
-  $('#number-choice').val('');
+function appendDiv(num, classToAdd){
+
+  const spanTxt = getSpanContent(num, classToAdd);
+
+  $('.js-results').append(`
+    <div class="fizz-buzz-item ${classToAdd}">
+      <span>${spanTxt}</span>
+    </div>
+  `);
 }
 
 function handleFormSubmission(){
@@ -45,9 +57,6 @@ function handleFormSubmission(){
 
   // send to counter
   numberCounter($('#number-choice').val());
-
-  // reset form
-  resetInputs();
 
 }
 
