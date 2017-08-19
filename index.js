@@ -1,7 +1,7 @@
 'use strict';
 
 function clearResults(){
-  $('.js-results').html();
+  $('.js-results').html('');
 }
 
 function numberCounter(numToCount){
@@ -26,19 +26,6 @@ function numberCounter(numToCount){
 
 }
 
-function getSpanContent(num, classToAdd){
-  let spanContent = '';
-
-  if (classToAdd !== ''){
-    spanContent = classToAdd;
-  }
-  else {
-    spanContent = num;
-  }
-
-  return spanContent;
-}
-
 function appendDiv(num, classToAdd){
 
   const spanTxt = getSpanContent(num, classToAdd);
@@ -50,13 +37,53 @@ function appendDiv(num, classToAdd){
   `);
 }
 
+function getSpanContent(num, classToAdd){
+
+  if (classToAdd !== ''){
+    return classToAdd;
+  }
+  else {
+    return num;
+  }
+
+}
+
 function handleFormSubmission(){
 
   // reset results div
   clearResults();
 
+  // save number passed
+  const numberSubmitted = $('#number-choice').val();
+
+  // check number
+  let numberValidated = validateNumber(numberSubmitted);
+
   // send to counter
-  numberCounter($('#number-choice').val());
+  if (numberSubmitted){
+    numberCounter(numberSubmitted);
+  }
+
+}
+
+function alertUser(){
+  alert('Enter a number greated than zero.');
+
+  $('#number-choice').val('');
+  $('#number-choice').focus();
+}
+
+function validateNumber(num){
+
+  if (num > 0){
+    return true;
+  }
+  else {
+
+    alertUser();
+    return false;
+
+  }
 
 }
 
