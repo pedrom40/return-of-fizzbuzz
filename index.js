@@ -67,7 +67,7 @@ function handleFormSubmission(){
 }
 
 function alertUser(){
-  alert('Enter a number greated than zero.');
+  $('.js-results').html('Enter a number greated than zero.');
 
   $('#number-choice').val('');
   $('#number-choice').focus();
